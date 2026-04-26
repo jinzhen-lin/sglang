@@ -79,6 +79,7 @@ class MoeRunnerBackend(Enum):
     CUTLASS = "cutlass"
     MARLIN = "marlin"
     AITER = "aiter"
+    HUMMING = "humming"
 
     def is_auto(self):
         return self == MoeRunnerBackend.AUTO
@@ -115,6 +116,8 @@ class MoeRunnerBackend(Enum):
 
     def is_aiter(self):
         return self == MoeRunnerBackend.AITER
+    def is_humming(self):
+        return self == MoeRunnerBackend.HUMMING
 
 
 class DeepEPMode(Enum):

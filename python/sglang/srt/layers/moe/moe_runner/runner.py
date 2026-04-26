@@ -48,6 +48,10 @@ class MoeRunner:
             from sglang.srt.layers.moe.moe_runner import aiter  # noqa: F401
 
             self.runner_core = None  # AITER only supports fused path
+        elif runner_backend.is_humming():
+            from sglang.srt.layers.moe.moe_runner.humming import HummingRunnerCore
+
+            self.runner_core = HummingRunnerCore(config)
         elif runner_backend.is_marlin():
             if lora_enabled:
                 from sglang.srt.lora.lora_moe_runner_marlin import MarlinLoraRunnerCore
