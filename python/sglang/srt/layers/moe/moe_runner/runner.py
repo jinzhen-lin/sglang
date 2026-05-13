@@ -55,6 +55,11 @@ class MoeRunner:
         self.fused_func = FusedOpPool.get_fused_func(
             a2a_backend_name, runner_backend_name
         )
+        if runner_backend.is_humming() and a2a_backend_name == "none":
+            # The Humming "none" fused path creates a temporary runner core on
+            # every forward and drops per-layer tuning/config caches. Use the
+            # standard pre/core/post path so the core created above is reused.
+            self.fused_func = None
 
         if self.runner_core is None and self.fused_func is None:
             raise NotImplementedError(
